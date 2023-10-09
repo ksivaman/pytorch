@@ -329,6 +329,7 @@ def make_graphed_callables(
         for func, args, static_input_surface in zip(
             callables, sample_args, per_callable_static_input_surfaces
         ):
+            outputs, grad_inputs = None, None
             for _ in range(num_warmup_iters):
                 outputs, _ = _tree_flatten(func(*args))
                 grad_inputs = torch.autograd.grad(
